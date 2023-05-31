@@ -2,39 +2,39 @@ import { useEffect, useState } from "react";
 import "./App.css";
 
 // get the word - done
-// Split the word into an array
-// have a reversed array of the same word
-// Compare each characters
+// Split the word into an array - done
+// have a reversed array of the same word - done
+// Compare each characters - done
+// improve the code
 
 const App = () => {
-  const [inputText, setInputText] = useState<string>();
-  const [textArr, setTextArr] = useState<string[] | undefined>([]);
-  const [reversedArr, setReversedArr] = useState<string[] | undefined>([]);
+  const [inputText, setInputText] = useState<string>("");
+  const [isPalindrome, setIsPalindrome] = useState<boolean>(false);
+  const [output, setOutput] = useState<string>();
 
-  const splitTextToArray = (text: string | undefined) => {
-    const textArray = text?.split("");
+  const checkPalindrome = (str: string) => {
+    const strLength = str?.length;
+    const midStr = Math.floor(strLength / 2);
 
-    setTextArr(textArr);
-    reverseTextArray(textArray);
+    for (let i = 0; i < midStr; i++) {
+      if (str[i] !== str[strLength - 1 - i]) {
+        return false;
+      }
+    }
+    return true;
   };
 
-  const reverseTextArray = (textArr: string[] | undefined) => {
-    const reversedArr: string[] = [];
-
-    textArr?.forEach((char) => {
-      reversedArr.unshift(char);
-    });
-
-    setReversedArr(reversedArr);
+  const displayOutput = () => {
+    isPalindrome ? setOutput("Palindrome") : setOutput("not Palindrome");
   };
 
-  const handleBtnClick = (text: string | undefined) => {
-    splitTextToArray(text);
+  const handleBtnClick = (text: string) => {
+    setIsPalindrome(() => checkPalindrome(text));
   };
 
   useEffect(() => {
-    console.log(reversedArr);
-  }, [reversedArr]);
+    displayOutput();
+  }, [isPalindrome]);
 
   return (
     <div className='container'>
@@ -51,11 +51,11 @@ const App = () => {
       </div>
       <div className='output-container'>
         <h1 className='title'>Output</h1>
-        <div className='output'></div>
+        <div className='output'>{output}</div>
       </div>
       <div className='btn-container'>
         <button
-          className='btn-reverse'
+          className='btn'
           type='button'
           onClick={() => handleBtnClick(inputText)}
         >
