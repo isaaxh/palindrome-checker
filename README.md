@@ -16,5 +16,4 @@ To consider this project complete, the app should have the following:
 ## ScreenShot
 
 ![palindrome-screenshot](./src/assets/screenshot-palindrome.png)
-
 ![not-palindrome-screenshot](./src/assets/screenshot-not-palindrome.png)
